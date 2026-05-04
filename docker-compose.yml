@@ -1,0 +1,16 @@
+services:
+  postgresql:
+    image: postgres:17.4
+    container_name: AccountDB
+    environment:
+      POSTGRES_DB: AccountDB
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      PGDATA: var/lib/postgresql/data
+    volumes:
+      - postgresql:/var/lib/postgresql/data
+    ports:
+      - "5430:5432"
+
+volumes:
+  postgresql:

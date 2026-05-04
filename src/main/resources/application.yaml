@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: AccountService
+  datasource:
+    url: jdbc:postgresql://localhost:5430/AccountDB
+    password: ${DB_PASSWORD}
+    username: ${DB_USERNAME}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+server:
+  port: 7082
+bank:
+  bik-branch: ${BIK_BRANCH}
