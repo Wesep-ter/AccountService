@@ -23,4 +23,5 @@ public class AccountData {
 
     private Currency currency;
 
+
 }

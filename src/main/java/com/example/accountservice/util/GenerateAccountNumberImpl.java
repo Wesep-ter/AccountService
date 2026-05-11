@@ -1,6 +1,7 @@
 package com.example.accountservice.util;
 
 import com.example.accountservice.dto.AccountData;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ public class GenerateAccountNumberImpl implements GenerateAccountNumber {
             7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1
     };
     private static final Random RANDOM = new Random();
+
 
     @Value("${bank.bik-branch}")
     private String bikBranch;

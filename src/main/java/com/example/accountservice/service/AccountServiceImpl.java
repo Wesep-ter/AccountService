@@ -2,7 +2,7 @@ package com.example.accountservice.service;
 
 import com.example.accountservice.constant.Status;
 import com.example.accountservice.dto.AccountData;
-import com.example.accountservice.dto.CreateAccountDto;
+import com.example.accountservice.dto.AccountDto;
 import com.example.accountservice.dto.mapper.AccountMapper;
 import com.example.accountservice.entity.Account;
 import com.example.accountservice.entity.AuditLog;
@@ -28,7 +28,7 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     @Transactional
-    public CreateAccountDto openAccount(AccountData accountData){
+    public AccountDto openAccount(AccountData accountData){
         Account account = createAccount(accountData);
         log.info("Счёт открыт пользователем с номером id: " + accountData.getUserId());
         return AccountMapper.toDto(accountRepository.save(account));
@@ -56,6 +56,15 @@ public class AccountServiceImpl implements AccountService{
         account.setBalance(newBalance);
         accountRepository.save(account);
         saveAuditLog(accountId, amount);
+    }
+
+    @Override
+    @Transactional
+    public void changeStatus(Long accountId, Status status) {
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow(() -> new RuntimeException("Счёт не найден"));
+        account.setStatus(status);
+        accountRepository.save(account);
     }
 
 

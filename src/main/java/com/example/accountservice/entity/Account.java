@@ -5,6 +5,9 @@ import com.example.accountservice.constant.Currency;
 import com.example.accountservice.constant.Status;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -13,6 +16,7 @@ import java.time.LocalDate;
 @Setter
 @Table(name = "accounts")
 @Builder
+@DynamicInsert
 @AllArgsConstructor
 @NoArgsConstructor
 public class Account {
@@ -34,7 +38,8 @@ public class Account {
     @Column(name = "account_type")
     private AccountType accountType;
 
-    @Column(name = "balance",columnDefinition = "DECIMAL(19,2) DEFAULT 0.00", nullable = false)
+    @Column(name = "balance", nullable = false, precision = 19, scale = 2)
+    @ColumnDefault("0.00")
     private BigDecimal balance;
 
     @Column(name = "currency")

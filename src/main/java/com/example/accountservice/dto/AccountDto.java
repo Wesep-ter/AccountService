@@ -10,10 +10,10 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateAccountDto {
+public class AccountDto {
     private String userId;
     private AccountType accountType;
     private String accountNumber;
     private Currency currency;
-    private BigDecimal initialDeposit;
+    private BigDecimal balance;
 }

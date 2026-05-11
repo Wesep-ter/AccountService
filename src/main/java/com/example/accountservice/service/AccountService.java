@@ -1,15 +1,16 @@
 package com.example.accountservice.service;
 
+import com.example.accountservice.constant.Status;
 import com.example.accountservice.dto.AccountData;
-import com.example.accountservice.dto.CreateAccountDto;
+import com.example.accountservice.dto.AccountDto;
 
 import java.math.BigDecimal;
 
 public interface AccountService {
 
-    CreateAccountDto openAccount(AccountData accountData);
+    AccountDto openAccount(AccountData accountData);
     void closeAccount();
     void updateBalance(Long accountId, BigDecimal amount);
-
+    void changeStatus(Long accountId, Status status);
 
 }
