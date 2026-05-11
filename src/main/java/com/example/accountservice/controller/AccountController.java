@@ -5,10 +5,9 @@ import com.example.accountservice.dto.CreateAccountDto;
 import com.example.accountservice.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/api/account")
@@ -21,6 +20,12 @@ public class AccountController {
     public ResponseEntity<CreateAccountDto> openAccount(@RequestBody AccountData accountData){
         CreateAccountDto body = accountService.openAccount(accountData);
         return ResponseEntity.ok(body);
+    }
+
+    @PutMapping("/updateBalance/{id}/{amount}")
+    public ResponseEntity<?> updateBalance(@PathVariable("id") Long accountId, @PathVariable("amount") BigDecimal amount){
+        accountService.updateBalance(accountId,amount);
+        return ResponseEntity.ok().build();
     }
 
 }

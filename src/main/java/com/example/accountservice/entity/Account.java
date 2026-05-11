@@ -2,6 +2,7 @@ package com.example.accountservice.entity;
 
 import com.example.accountservice.constant.AccountType;
 import com.example.accountservice.constant.Currency;
+import com.example.accountservice.constant.Status;
 import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
@@ -41,5 +42,12 @@ public class Account {
 
     @Column(name = "open_date")
     private LocalDate openDate;
+
+    @Column(name = "is_active")
+    private boolean isActive;
+
+    @Column(name = "status")
+    private Status status;
+
 
 }

@@ -11,6 +11,7 @@ public class AccountMapper {
                 .accountType(account.getAccountType())
                 .accountNumber(account.getAccountNumber())
                 .currency(account.getCurrency())
-                .initialDeposit(account.getBalance()).build();
+                .initialDeposit(account.getBalance())
+                .build();
     }
 }

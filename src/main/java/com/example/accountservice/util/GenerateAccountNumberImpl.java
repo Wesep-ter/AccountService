@@ -2,7 +2,6 @@ package com.example.accountservice.util;
 
 import com.example.accountservice.dto.AccountData;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
