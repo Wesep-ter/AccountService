@@ -7,9 +7,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -48,11 +48,10 @@ public class Account {
     @Column(name = "open_date")
     private LocalDate openDate;
 
-    @Column(name = "is_active")
-    private boolean isActive;
-
     @Column(name = "status")
     private Status status;
 
+    @Column(name = "closed_at")
+    private LocalDateTime statusChangeTime;
 
 }

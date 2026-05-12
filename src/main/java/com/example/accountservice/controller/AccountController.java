@@ -24,14 +24,20 @@ public class AccountController {
     }
 
     @PutMapping("/updateBalance/{id}/{amount}")
-    public ResponseEntity<?> updateBalance(@PathVariable("id") Long accountId, @PathVariable("amount") BigDecimal amount){
-        accountService.updateBalance(accountId,amount);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<AccountDto> updateBalance(@PathVariable("id") Long accountId, @PathVariable("amount") BigDecimal amount){
+        AccountDto body = accountService.updateBalance(accountId,amount);
+        return ResponseEntity.ok(body);
     }
     @PutMapping("/changeStatus/{id}")
-    public ResponseEntity<?> changeStatus(@PathVariable("id") Long accountId, @RequestBody Status status){
-        accountService.changeStatus(accountId, status);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<AccountDto> changeStatus(@PathVariable("id") Long accountId, @RequestBody Status status){
+        AccountDto body = accountService.changeStatus(accountId, status);
+        return ResponseEntity.ok(body);
+    }
+
+    @PatchMapping("/close/{id}")
+    public ResponseEntity<AccountDto> closeAccount(@PathVariable("id") Long id){
+        AccountDto body = accountService.closeAccount(id);
+        return ResponseEntity.ok(body);
     }
 
 }

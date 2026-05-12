@@ -9,8 +9,8 @@ import java.math.BigDecimal;
 public interface AccountService {
 
     AccountDto openAccount(AccountData accountData);
-    void closeAccount();
-    void updateBalance(Long accountId, BigDecimal amount);
-    void changeStatus(Long accountId, Status status);
+    AccountDto closeAccount(Long accountId);
+    AccountDto updateBalance(Long accountId, BigDecimal amount);
+    AccountDto changeStatus(Long accountId, Status status);
 
 }
