@@ -7,9 +7,11 @@ public class AccountMapper {
 
     public static AccountDto toDto(Account account){
         return AccountDto.builder()
+                .id(account.getId())
                 .userId(account.getUserId())
                 .accountType(account.getAccountType())
                 .accountNumber(account.getAccountNumber())
+                .accountHolder(account.getAccountHolder())
                 .currency(account.getCurrency())
                 .balance(account.getBalance())
                 .status(account.getStatus())

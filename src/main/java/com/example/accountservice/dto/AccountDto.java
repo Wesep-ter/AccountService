@@ -7,15 +7,16 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccountDto {
-    private String userId;
+    private Long id;
+    private Long userId;
     private AccountType accountType;
     private String accountNumber;
+    private String accountHolder;
     private Currency currency;
     private BigDecimal balance;
     private Status status;

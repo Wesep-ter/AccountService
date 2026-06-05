@@ -29,6 +29,16 @@ public class AccountServiceImpl implements AccountService{
 
     private final AuditLogRepository auditLogRepository;
 
+
+    @Override
+    @Transactional(readOnly = true)
+    public AccountDto getAccountById(Long id) {
+        Account account = accountRepository.findById(id)
+                .orElseThrow(() -> new AccountNotFoundException("Счёт с ID " + id + " не найден"));
+
+        return AccountMapper.toDto(account);
+    }
+
     @Override
     @Transactional
     public AccountDto openAccount(AccountData accountData){
@@ -52,21 +62,24 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     @Transactional
-    public AccountDto updateBalance(Long accountId, BigDecimal amount){
-        Account account = accountRepository.findById(accountId)
+    public AccountDto updateBalance(Long accountId, BigDecimal amount) {
+
+        Account account = accountRepository.findByIdForUpdate(accountId)
                 .orElseThrow(() -> new AccountNotFoundException("Счёт не найден"));
+
+        if (Status.BLOCKED.equals(account.getStatus())) {
+            throw new BlockedAccountException("Счёт заблокирован");
+        }
+
         BigDecimal newBalance = account.getBalance().add(amount);
 
-        if (Status.BLOCKED.equals(account.getStatus())){
-            throw  new BlockedAccountException("Счёт заблокирован");
-        }
-
-        if (newBalance.signum() < 0){
-            throw new NotEnoughMoneyException("Недостаточно средств");
+        if (newBalance.signum() < 0) {
+            throw new NotEnoughMoneyException("Недостаточно средств на счете");
         }
         account.setBalance(newBalance);
+        Account savedAccount = accountRepository.save(account);
         saveAuditLog(accountId, amount);
-        return AccountMapper.toDto(accountRepository.save(account));
+        return AccountMapper.toDto(savedAccount);
     }
 
     @Override

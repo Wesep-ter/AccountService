@@ -2,7 +2,7 @@ spring:
   application:
     name: AccountService
   datasource:
-    url: jdbc:postgresql://localhost:5430/AccountDB
+    url: jdbc:postgresql://localhost:5429/AccountDB
     password: ${DB_PASSWORD}
     username: ${DB_USERNAME}
     driver-class-name: org.postgresql.Driver
