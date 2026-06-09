@@ -10,6 +10,25 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  kafka:
+    bootstrap-servers: localhost:9092
+
+    # Консьюмер: слушает проверенные данные от сервиса карт
+    consumer:
+      group-id: account-service-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      auto-offset-reset: earliest
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
+
+    # Продюсер: отправляет финальный результат (SUCCESS/FAILED) обратно в Transfer Service
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 server:
   port: 7082
 bank:

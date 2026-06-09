@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 
 public interface AccountService {
 
+    void executeMoneyTransfer(Long sourceAccountId, Long targetAccountId, BigDecimal amount);
     AccountDto getAccountById(Long id);
     AccountDto openAccount(AccountData accountData);
     AccountDto closeAccount(Long accountId);

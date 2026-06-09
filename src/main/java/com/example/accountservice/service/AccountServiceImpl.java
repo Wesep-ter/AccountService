@@ -92,6 +92,14 @@ public class AccountServiceImpl implements AccountService{
         return AccountMapper.toDto(accountRepository.save(account));
     }
 
+    @Override
+    @Transactional
+    public void executeMoneyTransfer(Long sourceAccountId, Long targetAccountId, BigDecimal amount){
+        log.info("Начало перевода со счета {} на счет {} на сумму {}", sourceAccountId, targetAccountId, amount);
+        this.updateBalance(sourceAccountId, amount.negate());
+        this.updateBalance(targetAccountId, amount);
+        log.info("Перевод успешно выполнен на уровне СУБД");
+    }
 
     private Account createAccount(AccountData accountData){
         return Account.builder()
